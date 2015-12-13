@@ -26,7 +26,7 @@ goals.
     - [Preprocessors: additional format considerations](#preprocessors-additional-format-considerations)
     - [Linting](#linting)
 - [Naming conventions](#naming-conventions)
-    - [BEM](#bem)
+    - [Kickoff](#kickoff)
     - [Namespacing](#namespacing)
         - [CSS frameworks](#css-frameworks)
         - [State hooks](#state-hooks)
@@ -127,7 +127,7 @@ For reference here is an anatomy of a rule set:
 
 ### Formatting rules
 
-- Class names to use BEM notation, see [Naming Conventions -> BEM](#bem), where BEM isn't used then hyphen delimited class names are to be used.
+- Class names to use the Kickoff notation, see [Naming Conventions -> Kickoff](#kickoff), where Kickoff isn't used then hyphen delimited class names are to be used.
 - Use one discrete selector per line in multi-selector rule sets.
 
   **Good**
@@ -318,15 +318,15 @@ For reference here is an anatomy of a rule set:
   ```scss
   @include box-shadow( 0 2px 2px rgba( 0, 0, 0, .2 ) );
   ```
-- When a decimal mark is needed always include the zero.
+- When a decimal mark is needed there is no need to include the zero.
 
   **Good**
   ```scss
-  0.25rem
+  .25rem
   ```
   **Bad**
   ```scss
-  .25rem
+  0.25rem
   ```
 - Don't write trailing zeros for numeric values with a decimal point.
 
@@ -433,25 +433,25 @@ Always ensure classes are sensibly named; keep them as short as possible but as 
 
 [Further reading](http://cssguidelin.es/#naming-conventions).
 
-### BEM
+### Kickoff
 
-We use the BEM (Block, Element, Modifier) naming convention. When BEM is not used e.g. [JavaScript hooks](#javascript-hooks) then we use hyphen delimited classes e.g. `.foo-bar`, not `.foo_bar` or `.fooBar`.
+We use the Kickoff naming convention. When this is not used e.g. [JavaScript hooks](#javascript-hooks) then we use hyphen delimited classes e.g. `.foo-bar`, not `.foo_bar` or `.fooBar`.
 
-BEM is a methodology for naming and classifying CSS selectors in a way to make them a lot more strict, transparent and informative.
+Kickoff's naming convention is similar to BEM, it is a methodology for naming and classifying CSS selectors in a way to make them a lot more strict, transparent and informative.
 
 The naming convention follows this pattern:
 
 ```
 .block{}
-.block__element{}
+.block-element{}
 .block--modifier{}
 ```
 
 - `.block` represents the higher level of an abstraction or component.
-- `.block__element` represents a descendent of `.block` that helps form `.block` as a whole.
+- `.block-element` represents a descendent of `.block` that helps form `.block` as a whole.
 - `.block--modifier` represents a different state or version of `.block`.
 
-[Further reading](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/).
+[Further reading](http://trykickoff.com/learn/css.html#namingscheme).
 
 ### Namespacing
 
@@ -487,7 +487,7 @@ This means that we can attach both JS and CSS to classes in our markup but there
 
 A common practice is to use data-* attributes as JS hooks, but this is incorrect. data-* attributes, as per the [spec](http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#embedding-custom-non-visible-data-with-the-data-attributes), are used to store custom data private to the page or application (emphasis mine). data-* attributes are designed to store data, not be bound to.
 
-**JS hooks do not use BEM.**
+**JS hooks do not use the Kickoff naming convention.**
 
 #### Test and Tracking hooks
 
@@ -499,7 +499,7 @@ Tracking hooks are used for tracking elements for analytics.
 
 They're simply classes namespaced like so: `.test-` (test) / `.track` (tracking) and follow the same naming convention as JS Hooks e.g. `.test-[component]-[UI-it's-affecting]` / `.track-[component]-[UI-it's-affecting]`.
 
-**Test and Tracking hooks hooks do not use BEM.**
+**Test and Tracking hooks hooks do not use the Kickoff naming convention.**
 
 ##### Order of the above hooks
 
@@ -508,7 +508,8 @@ The order of the above hooks, within the `class` attribute, should be:
 1. Style hooks:
     1. Component hook (no namespace)
     2. Layout hook (`.l-`)
-    3. Utility hook (`u-`)
+    3. Utility hook (`.u-`)
+    3. Grid hook (`.g-`)
 2. JS hooks (`.js-`)
 3. Test hooks (`.test-`)
 4. Tracking hooks (`.track-`)
@@ -562,20 +563,15 @@ If you use Sublime Text editor then install [this package](https://sublime.wbond
 Every `.scss` file should always have a main title comment at the very top of the file and formatted like this:
 
 ```
-/* ============================================================================
-   @COMPONENTS -> PAGINATON
-   ========================================================================= */
+/**
+ * Title
+ * Description
+ * - Table of contents item 1
+ * - Table of contents item 2
+ * - Table of contents item 3
+ 
+ */
 ```
-
-The first part, prefixed with an `@` symbol, represents the location of the file within the CSS architecture (see [Architecture Overview](#architecture-overview)). The second part represents what the `.scss` file is actually styling which in most cases will be a component. It's similar to a breadcrumb pattern, so for a more deeply nested file we'll have this:
-
-```
-/* ============================================================================
-   @CORE -> MIXINS -> CONVERT PX TO EM/REM
-   ========================================================================= */
-```
-
-Each main title is prefixed with an `@` symbol to allow us to perform more targeted searches (e.g. `grep`, etc.) and is always in uppercase.
 
 **2 blank lines should always come after a main title comment.**
 
@@ -690,11 +686,9 @@ Each major chunk of CSS in a file should begin with a sub title comment e.g.
 
 ```
 /**
- * Grid container.
+ * Grid container
  */
 ```
-
-A full stop (period) should end the sub title comment.
 
 **2 blank lines should come before and 1 blank line should come after these sub title comments.**
 
@@ -767,9 +761,9 @@ This is the format to use:
  */
 ```
 
-### BEM modifier comments
+### Modifier comments
 
-Whenever you're using BEM and you declare a modifier (see [Naming conventions -> BEM](#bem)) you need to include a comment and if required provide a brief explanation as to what it's doing, e.g.
+Whenever you're using BEM and you declare a modifier (see [Naming conventions -> Kickoff](#kickoff)) you need to include a comment and if required provide a brief explanation as to what it's doing, e.g.
 
 ```
 /**
@@ -779,7 +773,9 @@ Whenever you're using BEM and you declare a modifier (see [Naming conventions ->
  */
 
 .u-table--striped {
-  tbody tr:nth-of-type(odd) td {background-color: $u-table-striped-background-cell-colour;}
+    tbody tr:nth-of-type(odd) td {
+        background-color: $u-table-striped-background-cell-colour;
+    }
 }
 ```
 
@@ -823,7 +819,9 @@ Whenever you write some styles for non-JavaScript users always include a comment
 
 ```
 // Non-JS users
-.no-js .selector {position: static;}
+.no-js .selector {
+    position: static;
+}
 ```
 
 ### `!important` comments
