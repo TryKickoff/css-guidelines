@@ -63,7 +63,7 @@ goals.
 
 Here are our rules for managing whitespace in Sass files:
 
-- Use soft indents (spaces).
+- Use hard indents (tabs).
 - Use 2 characters for the indentation level.
 - **Never** mix spaces and tabs for indentation.
 - Wrap at 80 characters wide.
@@ -88,7 +88,7 @@ If you use Sublime Text editor then install [this package](https://github.com/Su
 
 ```
 "tab_size": 2,
-"translate_tabs_to_spaces": true,
+"translate_tabs_to_spaces": false,
 "trim_automatic_white_space": true,
 "trim_trailing_white_space_on_save": true,
 "word_wrap": true,
@@ -100,7 +100,8 @@ This is optional:
 ```
 "rulers":
 [
-  80
+  80,
+  100
 ],
 ```
 
@@ -351,22 +352,26 @@ For reference here is an anatomy of a rule set:
 
 ### Declaration order
 
-Declarations should be ordered alphabetically.
+Declarations should be grouped by relationship where possible.
 
 Example:
 
 ```
 .selector {
-  background-color: #000;
-  bottom: 0;
-  box-sizing: border-box;
-  color: #fff;
-  display: inline-block;
-  font-family: sans-serif;
-  font-size: 1em;
-  height: 100px;
-  text-align: right;
-  width: 100px;
+    position: absolute;
+    bottom: 0;
+  
+    display: inline-block;
+    box-sizing: border-box;
+    height: 100px;
+    width: 100px;
+  
+    background-color: #000;
+  
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 1em;
+    text-align: right;
 }
 ```
 
@@ -427,7 +432,7 @@ If you use Sublime Text editor then install [this package](https://github.com/at
 
 ## Naming conventions
 
-Always ensure classes are sensibly named; keep them as short as possible but as long as necessary. Ensure any utilities are very vaguely named (e.g. `.u-display-block`, `.u-divider`) to allow for greater reuse. Don’t worry about the amount or length of classes in your markup; gzip will compress well written code incredibly well.
+Always ensure classes are sensibly named; keep them as short as possible but as long as necessary. Ensure any utilities are very vaguely named (e.g. `.text-center`, `.clearfix`) to allow for greater reuse. Don’t worry about the amount or length of classes in your markup; gzip will compress well written code incredibly well.
 
 **ID's cannot be used as style hooks**, [see](http://cssguidelin.es/#ids-in-css).
 
@@ -442,13 +447,13 @@ Kickoff's naming convention is similar to BEM, it is a methodology for naming an
 The naming convention follows this pattern:
 
 ```
-.block{}
-.block-element{}
-.block--modifier{}
+.block {}
+.block-element {}
+.block--modifier {}
 ```
 
 - `.block` represents the higher level of an abstraction or component.
-- `.block-element` represents a descendent of `.block` that helps form `.block` as a whole.
+- `.block-element` represents a descendent/child of `.block` that helps form `.block` as a whole.
 - `.block--modifier` represents a different state or version of `.block`.
 
 [Further reading](http://trykickoff.com/learn/css.html#namingscheme).
@@ -519,10 +524,6 @@ Example:
 ```
 <div class="pagination l-container u-text-align-center js-paginate test-pagination ga-pagination">
 ```
-
-
-
-
 
 ## Comments
 
