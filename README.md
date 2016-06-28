@@ -440,7 +440,7 @@ Always ensure classes are sensibly named; keep them as short as possible but as 
 
 ### Kickoff
 
-We use the Kickoff naming convention. When this is not used e.g. [JavaScript hooks](#javascript-hooks) then we use hyphen delimited classes e.g. `.foo-bar`, not `.foo_bar` or `.fooBar`.
+We use the [Kickoff naming convention](http://trykickoff.com/learn/css.html#namingscheme). When this is not used e.g. [JavaScript hooks](#javascript-hooks) then we use hyphen delimited classes e.g. `.foo-bar`, not `.foo_bar` or `.fooBar`.
 
 Kickoff's naming convention is similar to BEM, it is a methodology for naming and classifying CSS selectors in a way to make them a lot more strict, transparent and informative.
 
